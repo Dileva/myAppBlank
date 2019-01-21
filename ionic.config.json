@@ -1,6 +1,8 @@
 {
   "name": "myAppBlank",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "6f95f6f5"
 }
