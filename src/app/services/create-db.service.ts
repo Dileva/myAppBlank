@@ -1,32 +1,28 @@
 import { Injectable } from '@angular/core';
 
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { Storage } from '@ionic/Storage';
+
+import { SQLite } from '@ionic-native/sqlite/ngx';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateDBService {
 
-  constructor(private sqlite: SQLite) { }
+  constructor(private storage: Storage) { }
 
   createDB(){
 
-  	//this.sqlite.echoTest();
- 
-  	this.sqlite.create({
-  name: 'data.db',
-  location: 'default'
-})
-  .then((db: SQLiteObject) => {
+  	 // set a key/value
+    this.storage.set('name', 'Max');
 
+	  // Or to get a key/value pair
+	this.storage.get('age').then((val) => {
+	   console.log('Your age is', val);
+	});
 
-    db.executeSql('create table danceMoves(name VARCHAR(32))', [])
-      .then(() => alert('Executed SQL'))
-      .catch(e => alert(e));
+  }
 
-
-  })
-  .catch(e => alert(e));
- }
 
 }

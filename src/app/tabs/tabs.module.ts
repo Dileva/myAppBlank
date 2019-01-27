@@ -8,9 +8,32 @@ import { IonicModule } from '@ionic/angular';
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
+/*  {  
+    path: 'add',
+    loadChildren: '../add/add.module#AddPageModule'
+  },*/
   {
     path: '',
-    component: TabsPage
+    component: TabsPage,
+    children: [
+      {
+        path: 'add',
+        loadChildren: '../inventory-childs/add/add.module#AddPageModule'
+      },
+      {
+        path: 'home',
+        loadChildren: '../home/home.module#HomePageModule'
+      },
+      {
+        path: 'inventory',
+        loadChildren: '../inventory/inventory.module#InventoryPageModule'
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/inventory',
+        pathMatch: 'full'
+      }
+    ]
   }
 ];
 

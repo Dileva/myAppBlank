@@ -11,17 +11,27 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { SQLite } from '@ionic-native/sqlite/ngx';
+import {NgForm} from '@angular/forms';
 
+//pages
+	import { LoginPage } from './login/login.page';
+	import { HomePage } from './home/home.page';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(
+      {
+       name: '__dataDB',
+       driverOrder: ['sqlite','indexeddb', 'websql']
+     }
+    )
   ],
   providers: [
     StatusBar,
     SplashScreen,
     SQLite, 
+    NgForm,
 
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

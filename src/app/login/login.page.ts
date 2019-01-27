@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { LoginDBService } from '../services/login-db.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -11,15 +12,43 @@ import { LoginDBService } from '../services/login-db.service';
 })
 export class LoginPage implements OnInit {
 
-  constructor( private router:Router, private loginDB:LoginDBService ) { }
+	password:string = '';
 
-  doLogin(){
+  constructor( private router:Router, private loginDB:LoginDBService ) {
 
-  	this.loginDB.loginApp();
+    /**** comprueba si esta logeado, si es asi redirige a la pagina home ****/
+    let isLogged = this.loginDB.isLogged();
+
+    if (isLogged) {
+      this.router.navigate(['/inventory']);
+    }
+
+   }
+
+ async doLogin(){
+
+/**** comprueba la contraseña y redirige a la pagina home****/
+ // this.loginDB.password = this.password;
+ let valid:boolean = await this.loginDB.loginApp( this.password );
+
+ if (valid === true) {
+   this.router.navigate(['/inventory']);
+ }
+ //console.log(valid);
+  //	console.log(this.loginDB.loginApp());
   	//this.router.navigate(['/special']);
   }
 
   ngOnInit() {
+
+    this.loginDB.existPassword().then((exist) => {
+
+      if (exist === false) {
+        this.loginDB.setPassword();
+      }
+
+    });
+
   }
 
 }

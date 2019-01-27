@@ -5,11 +5,15 @@
 </ion-header>
 
 <ion-content padding>
-
-<ion-item text-center>
-	<ion-input clearInput placeholder="Introduce tu contraseña" name="password" ></ion-input>
-</ion-item>
-
-<ion-button expand='full' shape='round' (click)="doLogin()">Login</ion-button>
+<ion-grid>
+	<ion-row align-items-center justify-content-center>
+		<ion-col>
+			<ion-item text-center>
+				<ion-input clearInput placeholder="Introduce tu contraseña" [(ngModel)]="password" type="password"></ion-input>
+			</ion-item>
+			<ion-button expand='full' shape='round' (click)="doLogin()">Login</ion-button>
+		</ion-col>
+	</ion-row>
+</ion-grid>
 
 </ion-content>
